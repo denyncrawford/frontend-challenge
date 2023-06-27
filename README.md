@@ -68,6 +68,8 @@ NEXT_PUBLIC_WEB_APP_COGNITO_CLIENT_ID=...
 
 - Crear un page component que consuma el Api Route `/api/stores`. Este page debe de mostrar un formulario para crear una tienda. Para hacer la consulta del api, se debe de usar el hook useMutation de react-query. Idealmente debe de ser un custom hook que reciba como payload los datos de la tienda. Este formulario debe de contener los siguientes campos: name, description, email (todos los campos son required), y una sección para cargar items. Cada item debe de tener los siguientes campos: name, description, price, quantity ( todos los campos son required ) . Si la petición da success, mostrar un mensaje de éxito y limpiar el formulario. Implementar loading y error state.
 
+![Referencia del formulario](/form_reference.png)
+
 ## Bonus challenge (opcional)
 
 ### Mejorar tipado de useGetCreatorSocialNetworkProfile.
