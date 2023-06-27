@@ -67,3 +67,15 @@ NEXT_PUBLIC_WEB_APP_COGNITO_CLIENT_ID=...
 ### 3. Mutation para crear una tienda.
 
 - Crear un page component que consuma el Api Route `/api/stores`. Este page debe de mostrar un formulario para crear una tienda. Para hacer la consulta del api, se debe de usar el hook useMutation de react-query. Idealmente debe de ser un custom hook que reciba como payload los datos de la tienda. Este formulario debe de contener los siguientes campos: name, description, email (todos los campos son required), y una sección para cargar items. Cada item debe de tener los siguientes campos: name, description, price, quantity ( todos los campos son required ) . Si la petición da success, mostrar un mensaje de éxito y limpiar el formulario. Implementar loading y error state.
+
+## Bonus challenge (opcional)
+
+### Mejorar tipado de useGetCreatorSocialNetworkProfile.
+
+- El hook useGetCreatorSocialNetworkProfile, se conecta con una ruta backend, este backend retorna un objeto con una estructura distinta dependiendo del tipo de red social. Mejorar el type de este hook para que el objeto de retorno tenga la estructura correcta dependiendo del tipo de red social.
+
+  Ej: Si el tipo de red social es facebook, el objeto de retorno debe de tener la siguiente estructura: FacebookResponseData
+  Ej: Si el tipo de red social es instagram, el objeto de retorno debe de tener la siguiente estructura: InstagramResponseData
+  <!-- Show https://i.imgur.com/Afv30pK.png -->
+
+  ![Referencia del return type correcto](https://i.imgur.com/Afv30pK.png)
