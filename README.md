@@ -74,7 +74,7 @@ NEXT_PUBLIC_WEB_APP_COGNITO_CLIENT_ID=...
 
 ### Mejorar tipado de useGetCreatorSocialNetworkProfile.
 
-- El hook useGetCreatorSocialNetworkProfile, se conecta con una ruta backend, este backend retorna un objeto con una estructura distinta dependiendo del tipo de red social. Mejorar el type de este hook para que el objeto de retorno tenga la estructura correcta dependiendo del tipo de red social.
+- En el file src/components/insights, el hook useGetCreatorSocialNetworkProfile, se conecta con una ruta backend, este backend retorna un objeto con una estructura distinta dependiendo del tipo de red social. Mejorar el type de este hook para que el objeto de retorno tenga la estructura correcta dependiendo del tipo de red social.
 
   Ej: Si el tipo de red social es facebook, el objeto de retorno debe de tener la siguiente estructura: FacebookResponseData
   Ej: Si el tipo de red social es instagram, el objeto de retorno debe de tener la siguiente estructura: InstagramResponseData
