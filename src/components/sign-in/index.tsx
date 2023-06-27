@@ -42,7 +42,6 @@ export function SignInForm() {
     <div className={'px-2'}>
       {/* logo */}
       <div className={'flex justify-center'}></div>
-
       <div
         className={
           'border shadow-[0px_5px_16px_rgba(8,15,52,0.06)] w-full max-w-[528px] py-8 rounded-[34px] border-solid border-[#eff0f7] bg-white'
