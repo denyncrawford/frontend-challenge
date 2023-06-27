@@ -1,0 +1,30 @@
+@media screen and (min-width: 768px) {
+  /* .main::after {
+    content: '';
+    position: absolute;
+
+    width: 1500px;
+    height: 200px;
+
+    top: 0;
+    right: 0;
+
+    transform: translate(60%, -60%);
+
+    background: radial-gradient(circle 200px at center, #4850f329 1px, #4850f384 10px, rgb(249 250 251) 550px);
+  }
+  .main::before {
+    content: '';
+    position: absolute;
+
+    width: 1500px;
+    height: 200px;
+
+    top: 0;
+    left: 0;
+
+    transform: translate(-60%, -60%);
+
+    background: radial-gradient(circle 200px at center, #ec5e3d 1px, #ec5d3d91 10px, rgb(249 250 251) 550px);
+  } */
+}

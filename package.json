@@ -1,0 +1,41 @@
+{
+  "name": "custom-auth-cognito",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@aws-amplify/ui-react": "^4.3.8",
+    "@next/font": "13.1.6",
+    "@types/node": "18.14.0",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "aws-amplify": "^5.0.15",
+    "cookies-next": "^2.1.1",
+    "cva": "npm:class-variance-authority@^0.4.0",
+    "eslint-config-next": "13.1.6",
+    "formik": "^2.2.9",
+    "jotai": "^2.0.2",
+    "next": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-gtm-module": "^2.0.11",
+    "react-select": "^5.7.0",
+    "react-toastify": "^9.1.1",
+    "reactstrap": "^9.1.6",
+    "typescript": "4.9.5",
+    "yup": "^1.0.0",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/react-gtm-module": "^2.0.1",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.4",
+    "tailwindcss": "^3.2.7"
+  }
+}
