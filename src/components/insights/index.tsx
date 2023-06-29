@@ -76,18 +76,18 @@ export function InsightsInstagram() {
     socialNetwork: 'instagram',
     username: 'lorem',
   });
-  return <div>{JSON.stringify(instagramQuery.data?.data.facebook_stats)}</div>;
+  return <div>{JSON.stringify(instagramQuery.data?.data.instagram_stats)}</div>;
 }
 export function InsightsTiktok() {
   const tiktokQuery = useGetCreatorSocialNetworkProfile({
     socialNetwork: 'tiktok',
     username: 'lorem',
   });
-  return <div>{JSON.stringify(tiktokQuery.data?.data.facebook_stats)}</div>;
+  return <div>{JSON.stringify(tiktokQuery.data?.data.tiktok_stats)}</div>;
 }
 export function InsightsFacebook() {
   const facebookQuery = useGetCreatorSocialNetworkProfile({
-    socialNetwork: 'instagram',
+    socialNetwork: 'facebook',
     username: 'lorem',
   });
   return <div>{JSON.stringify(facebookQuery.data?.data.facebook_stats)}</div>;
