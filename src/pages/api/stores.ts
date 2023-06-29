@@ -76,12 +76,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (method) {
     case 'GET':
       const { page = 1, limit = 10, search } = req.query;
-      const startIndex = (Number(page) - 1) * Number(limit);
-      const endIndex = Number(page) * Number(limit);
-      let results = stores.slice(startIndex, endIndex);
+      let results = stores;
       if (typeof search === 'string') {
         results = results.filter((store) => store.name.toLowerCase().includes(search.toLowerCase()));
       }
+      const startIndex = (Number(page) - 1) * Number(limit);
+      const endIndex = Number(page) * Number(limit);
+      results = results.slice(startIndex, endIndex);
       res.status(200).json(results);
       break;
     case 'POST':
