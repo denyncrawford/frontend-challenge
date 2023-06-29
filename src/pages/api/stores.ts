@@ -89,7 +89,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       try {
         const storeBody = getStoreBodySchema().parse(req.body);
 
-        res.status(200).json(stores);
+        res.status(200).json({
+          status: 'success',
+          data: storeBody,
+        });
       } catch (error) {
         let err = error;
         if (err instanceof z.ZodError) {
