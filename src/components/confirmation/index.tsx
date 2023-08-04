@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { CustomFormikInputGroupText } from '../forms/custom-formik-input-group-text';
 import { useEmailPasswordAtom } from '@/hooks/useEmailPasswordAtom';
-interface FormValues {
+interface IFormValues {
   code: string;
   email: string;
 }
@@ -42,7 +42,7 @@ export function Confirmation() {
             const email = values.email.trim().toLowerCase();
             setIsLoading(true);
             try {
-              Auth.confirmSignUp(email, values.code)
+              await Auth.confirmSignUp(email, values.code)
                 .then(() => {
                   toast.info('Tu cuenta ha sido confirmada');
                   if (emailPassword.email && emailPassword.password) {
@@ -64,15 +64,6 @@ export function Confirmation() {
                       },
                     });
                   }
-                })
-                .catch((error) => {
-                  let errorMessage = 'Ha ocurrido un error, por favor intenta de nuevo';
-                  if (CODE_ERRORS_TRANSLATIONS[(error as any).code as keyof typeof CODE_ERRORS_TRANSLATIONS]) {
-                    errorMessage =
-                      CODE_ERRORS_TRANSLATIONS[(error as any).code as keyof typeof CODE_ERRORS_TRANSLATIONS];
-                  }
-                  setError(errorMessage);
-                  setIsLoading(false);
                 });
             } catch (error) {
               let errorMessage = 'Ha ocurrido un error, por favor intenta de nuevo';
@@ -85,7 +76,7 @@ export function Confirmation() {
             }
           }}
         >
-          {(props: FormikProps<FormValues>) => (
+          {(props: FormikProps<IFormValues>) => (
             <Form className="px-5">
               {!emailPassword.email && (
                 <div>

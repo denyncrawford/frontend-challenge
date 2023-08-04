@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface CustomCheckboxItemProps {
+interface ICustomCheckboxItemProps {
   value: string;
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -8,7 +8,7 @@ interface CustomCheckboxItemProps {
   name: string;
 }
 
-function CustomCheckboxItem({ checked, label, onChange, value, name }: CustomCheckboxItemProps) {
+function CustomCheckboxItem({ checked, label, onChange, value, name }: ICustomCheckboxItemProps) {
   return (
     <div className="mt-2 square-switch" key={value}>
       <input

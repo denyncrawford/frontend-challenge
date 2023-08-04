@@ -1,12 +1,13 @@
 import { Field, Form, Formik, FormikProps } from 'formik';
 import React, { useState } from 'react';
-import { Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 import { Auth } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { cx } from 'cva';
 import { CustomFormikInputGroupText } from '../forms/custom-formik-input-group-text';
+import { useEmailPasswordAtom } from '@/hooks/useEmailPasswordAtom';
 
 interface FormValues {
   email: string;
@@ -15,6 +16,9 @@ interface FormValues {
 export function ForgotPasswordForm() {
   const { push, query } = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  const [emailPassword, setEmailPassword] = useEmailPasswordAtom();
+
 
   return (
     <div className={'px-2'}>
@@ -44,7 +48,7 @@ export function ForgotPasswordForm() {
             setIsLoading(true);
             try {
               await Auth.forgotPassword(values.email.trim().toLowerCase());
-
+              setEmailPassword({ ...emailPassword, email: values.email.trim().toLowerCase() });
               toast.info('Se ha enviado un correo de verificación a tu cuenta de correo electrónico');
 
               push({

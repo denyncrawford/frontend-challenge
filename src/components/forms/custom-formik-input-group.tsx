@@ -3,7 +3,7 @@ import React from 'react';
 import { FormFeedback, FormGroup, Input, Label } from 'reactstrap';
 import { CustomFormikInput } from './custom-formik-input';
 
-interface CustomFormikInputGroupProps extends FieldProps {
+interface ICustomFormikInputGroupProps extends FieldProps {
   id: string;
   label: string;
 }
@@ -13,7 +13,7 @@ const CustomFormikInputGroup = ({
   form: { touched, errors, ...rest },
   label,
   ...props
-}: CustomFormikInputGroupProps) => (
+}: ICustomFormikInputGroupProps) => (
   <FormGroup>
     <Label for={props.id} className={'label-color'}>
       {label}

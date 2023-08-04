@@ -1,9 +1,12 @@
 import { SignInForm } from '@/components/sign-in';
 import { useIsRedirectingAtom } from '@/hooks/useIsRedirecting';
+import { useAuth } from '@/utils/auth/AuthContext';
 import Head from 'next/head';
+import Dashboard from './dashboard';
 
 export default function Home() {
   const [isRedirecting, setIsRedirecting] = useIsRedirectingAtom();
+  const { user } = useAuth();
   return (
     <>
       <Head>
@@ -34,8 +37,10 @@ export default function Home() {
               </svg>
               <span className="sr-only">Loading...</span>
             </div>
-          ) : (
+          ) : !user ? (
             <SignInForm />
+          ) : (
+            <Dashboard />
           )}
         </div>
       </div>

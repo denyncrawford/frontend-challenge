@@ -1,13 +1,15 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
+interface IStats {
+  username: string;
+}
+
 type TiktokResponseData = {
   data: {
     social_network_name: string;
     username: string;
-    tiktok_stats: {
-      username: string;
-    };
+    tiktok_stats: IStats
   };
   message: any;
   status: string;
@@ -16,9 +18,7 @@ type InstagramResponseData = {
   data: {
     social_network_name: string;
     username: string;
-    instagram_stats: {
-      username: string;
-    };
+    instagram_stats: IStats
   };
   message: any;
   status: string;
@@ -27,9 +27,7 @@ type FacebookResponseData = {
   data: {
     social_network_name: string;
     username: string;
-    facebook_stats: {
-      username: string;
-    };
+    facebook_stats: IStats
   };
   message: any;
   status: string;
@@ -39,33 +37,39 @@ export function getCreatorSocialNetworkQueryKey(params: Params): unknown[] {
   return ['use-get-creator-social-network-profile', params];
 }
 
-interface ParamsInstagram {
+interface IParamsInstagram {
   username: string;
   socialNetwork: 'instagram';
 }
 
-interface ParamsFacebook {
+interface IParamsFacebook {
   username: string;
   socialNetwork: 'facebook';
 }
 
-interface ParamsTiktok {
+interface IParamsTiktok {
   username: string;
   socialNetwork: 'tiktok';
 }
 
 type ResponseSocialNetwork = InstagramResponseData | TiktokResponseData | FacebookResponseData;
 
-type Params = ParamsInstagram | ParamsTiktok | ParamsFacebook;
+type SharedResponseSocialNetwork = ResponseSocialNetwork & {
+  data: {
+    [key: string]: IStats;
+  };
+}
+
+type Params = IParamsInstagram | IParamsTiktok | IParamsFacebook;
 
 export function useGetCreatorSocialNetworkProfile(
   params: Params,
-  options: UseQueryOptions<AxiosResponse<ResponseSocialNetwork>, AxiosError, ResponseSocialNetwork, unknown[]> = {},
+  options: UseQueryOptions<AxiosResponse<SharedResponseSocialNetwork>, AxiosError, SharedResponseSocialNetwork, unknown[]> = {},
 ) {
   return useQuery({
     queryKey: getCreatorSocialNetworkQueryKey(params),
     queryFn: async () => {
-      return axios.get<ResponseSocialNetwork>(`/${params.socialNetwork}/${params.username}`);
+      return axios.get<SharedResponseSocialNetwork>(`/${params.socialNetwork}/${params.username}`);
     },
     ...options,
   });

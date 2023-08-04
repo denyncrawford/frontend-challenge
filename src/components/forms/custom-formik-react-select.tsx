@@ -2,22 +2,22 @@ import { FieldProps } from 'formik';
 import React from 'react';
 import Select, { OnChangeValue, Options } from 'react-select';
 
-interface Option {
+interface IOption {
   label: string;
   value: string;
 }
 
-interface FormikSelectProps extends FieldProps {
-  options: Options<Option>;
+interface IFormikSelectProps extends FieldProps {
+  options: Options<IOption>;
   isMulti?: boolean;
   required?: boolean;
 }
 
-export const CustomFormikReactSelect = ({ field, form, options, isMulti = false, required }: FormikSelectProps) => {
-  const onChange = (option: OnChangeValue<Option | Option[], boolean>) => {
+export const CustomFormikReactSelect = ({ field, form, options, isMulti = false, required }: IFormikSelectProps) => {
+  const onChange = (option: OnChangeValue<IOption | IOption[], boolean>) => {
     form.setFieldValue(
       field.name,
-      isMulti ? (option as Option[]).map((item: Option) => item.value) : (option as Option).value,
+      isMulti ? (option as IOption[]).map((item: IOption) => item.value) : (option as IOption).value,
     );
   };
 

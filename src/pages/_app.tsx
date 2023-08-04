@@ -4,6 +4,9 @@ import '@/styles/globals.css';
 import '@/styles/Home.css';
 import 'react-toastify/dist/ReactToastify.css';
 import dynamic from 'next/dynamic';
+import withAuth from '@/utils/auth/withAuth';
+import { excludedRoutes } from '@/constants/excludedRoutes';
+import { AuthProvider } from '@/utils/auth/AuthContext';
 
 const DynamicAmplifyConfig = dynamic(
   () => import('@/components/lazy-amplify-configure').then((el) => el.LazyAmplifyConfigure),
@@ -21,11 +24,14 @@ const DM_SANS = DM_Sans({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const AuthenticatedComponent = withAuth(Component, { excludedRoutes });
   return (
     <DynamicAmplifyConfig>
-      <main className={`${(DM_SANS.className, 'main bg-gray-50')}`}>
-        <Component {...pageProps} />
-      </main>
+      <AuthProvider>
+        <main className={`${(DM_SANS.className, 'main bg-gray-50')}`}>
+          <AuthenticatedComponent {...pageProps} />
+        </main>
+      </AuthProvider>
     </DynamicAmplifyConfig>
   );
 }

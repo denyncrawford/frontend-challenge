@@ -3,7 +3,7 @@ import React from 'react';
 import { FormFeedback, FormGroup, FormText, Input, InputGroup, InputGroupText, Label } from 'reactstrap';
 import { cx } from 'cva';
 
-interface CustomFormikInputGroupTextProps extends FieldProps {
+interface ICustomFormikInputGroupTextProps extends FieldProps {
   id: string;
   label?: string;
   labelClassName?: string;
@@ -27,7 +27,7 @@ const CustomFormikInputGroupText = ({
   description,
   labelClassName,
   ...props
-}: CustomFormikInputGroupTextProps) => (
+}: ICustomFormikInputGroupTextProps) => (
   <FormGroup>
     {label ? (
       <Label size={bsSize} for={props.id} className={cx('label-color', labelClassName)}>
