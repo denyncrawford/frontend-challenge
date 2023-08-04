@@ -14,8 +14,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
       const startIndex = (Number(page) - 1) * Number(limit);
       const endIndex = Number(page) * Number(limit);
+      const total = results.length;
       results = results.slice(startIndex, endIndex);
-      res.status(200).json(results);
+      setTimeout(() => {
+        res.status(200).json({ results, total });
+      }, Math.floor(Math.random() * (2000 - 1000)) + 1000);
       break;
     case 'POST':
       try {

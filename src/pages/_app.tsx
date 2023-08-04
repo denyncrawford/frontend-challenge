@@ -7,6 +7,10 @@ import dynamic from 'next/dynamic';
 import withAuth from '@/utils/auth/withAuth';
 import { excludedRoutes } from '@/constants/excludedRoutes';
 import { AuthProvider } from '@/utils/auth/AuthContext';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 const DynamicAmplifyConfig = dynamic(
   () => import('@/components/lazy-amplify-configure').then((el) => el.LazyAmplifyConfigure),
@@ -23,14 +27,18 @@ const DM_SANS = DM_Sans({
   preload: true,
 });
 
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps }: AppProps) {
   const AuthenticatedComponent = withAuth(Component, { excludedRoutes });
   return (
     <DynamicAmplifyConfig>
       <AuthProvider>
-        <main className={`${(DM_SANS.className, 'main bg-gray-50')}`}>
-          <AuthenticatedComponent {...pageProps} />
-        </main>
+        <QueryClientProvider client={queryClient}>
+          <main className={`${(DM_SANS.className, 'main bg-gray-50')}`}>
+            <AuthenticatedComponent {...pageProps} />
+          </main>
+        </QueryClientProvider>
       </AuthProvider>
     </DynamicAmplifyConfig>
   );

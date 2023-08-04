@@ -1,5 +1,6 @@
 
 import { useAuth } from "@/utils/auth/AuthContext";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export const DashboardCard = () => {
@@ -23,7 +24,13 @@ export const DashboardCard = () => {
         <p className={'not-italic font-normal text-lg leading-[30px] text-center text-[#4f4f4f] mt-[25px] mb-[33px]'}>
           {user?.email}
         </p>
-        <div>
+        <div className="flex flex-col items-center justify-center">
+          <Link href="/stores" className={
+            'h-14 w-full rounded-2xl text-white font-semibold text-lg leading-[30px] text-center flex items-center justify-center bg-[#4850F3] mt-4 focus:outline-none focus:ring-4 focus:ring-blue-300 hover:opacity-[0.90] disabled:opacity-50 disabled:cursor-not-allowed px-12'
+          }
+          >
+            Ver tiendas
+          </Link>
           <button
             color="primary"
             className={

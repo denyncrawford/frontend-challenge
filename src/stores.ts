@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-interface Store {
+export interface IStore {
   name: string;
   description: string;
   email: string;
@@ -32,8 +32,8 @@ const RANDOM_WORDS = [
   'ut',
 ];
 
-function generateStoreData(): Store[] {
-  const stores: Store[] = [];
+function generateStoreData(): IStore[] {
+  const stores: IStore[] = [];
 
   for (let i = 0; i < 100; i++) {
     stores.push({
