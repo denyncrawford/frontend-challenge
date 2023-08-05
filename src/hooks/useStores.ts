@@ -1,5 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { createStore, getStores } from "@/services/store";
+import {
+  createStore,
+  getStores,
+  IPostStoreResponseBody,
+} from "@/services/store";
+import { AxiosError } from "axios";
 import { atom, useAtom } from "jotai";
 import { IStore } from "@/stores";
 
@@ -7,6 +12,15 @@ interface IPagination {
   page: number;
   limit: number;
   search: string;
+}
+
+export interface IZodMappedError {
+  path: string;
+  message: string;
+}
+export interface IResponseError {
+  status: string;
+  error: IZodMappedError[];
 }
 
 export const paginationAtom = atom<IPagination>({
@@ -35,6 +49,8 @@ export const useStores = (pagination: IPagination) => {
   );
 };
 
-export const useCreateStore = (store: IStore) => {
-  return useMutation(() => createStore(store));
-}
+export const useCreateStore = () => {
+  return useMutation<IPostStoreResponseBody, AxiosError<IResponseError>, Partial<IStore>>((
+    store: Partial<IStore>,
+  ) => createStore(store));
+};

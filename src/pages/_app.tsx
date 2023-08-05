@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import { DM_Sans } from '@next/font/google';
 import '@/styles/globals.css';
 import '@/styles/Home.css';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import dynamic from 'next/dynamic';
 import withAuth from '@/utils/auth/withAuth';
@@ -37,6 +38,18 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <main className={`${(DM_SANS.className, 'main bg-gray-50')}`}>
             <AuthenticatedComponent {...pageProps} />
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+            />
           </main>
         </QueryClientProvider>
       </AuthProvider>

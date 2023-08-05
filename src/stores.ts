@@ -1,5 +1,12 @@
 import { z } from 'zod';
 
+export interface IStoreItem {
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+}
+
 export interface IStore {
   name: string;
   description: string;
@@ -9,6 +16,7 @@ export interface IStore {
   city: string;
   state: string;
   zip: string;
+  items?: IStoreItem[];
 }
 
 const RANDOM_WORDS = [

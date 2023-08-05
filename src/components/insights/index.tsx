@@ -5,6 +5,12 @@ interface IStats {
   username: string;
 }
 
+enum StatTypes {
+  'facebook' = 'facebook_stats',
+  'instagram' = 'instagram_stats',
+  'tiktok' = 'tiktok_stats',
+}
+
 type TiktokResponseData = {
   data: {
     social_network_name: string;
@@ -56,7 +62,7 @@ type ResponseSocialNetwork = InstagramResponseData | TiktokResponseData | Facebo
 
 type SharedResponseSocialNetwork = ResponseSocialNetwork & {
   data: {
-    [key: string]: IStats;
+    [key in StatTypes]: IStats;
   };
 }
 
