@@ -5,12 +5,6 @@ interface IStats {
   username: string;
 }
 
-enum StatTypes {
-  'facebook' = 'facebook_stats',
-  'instagram' = 'instagram_stats',
-  'tiktok' = 'tiktok_stats',
-}
-
 type TiktokResponseData = {
   data: {
     social_network_name: string;
@@ -60,43 +54,49 @@ interface IParamsTiktok {
 
 type ResponseSocialNetwork = InstagramResponseData | TiktokResponseData | FacebookResponseData;
 
-type SharedResponseSocialNetwork = ResponseSocialNetwork & {
+type SharedResponseSocialNetwork<T> = ResponseSocialNetwork & {
   data: {
-    [key in StatTypes]: IStats;
+    social_network_name: T;
+  } & {
+    [key in T extends 'facebook'
+      ? 'facebook_stats'
+      : T extends 'instagram'
+      ? 'instagram_stats'
+      : 'tiktok_stats']: IStats;
   };
 }
 
 type Params = IParamsInstagram | IParamsTiktok | IParamsFacebook;
 
-export function useGetCreatorSocialNetworkProfile(
+export function useGetCreatorSocialNetworkProfile<T extends Params['socialNetwork']>(
   params: Params,
-  options: UseQueryOptions<AxiosResponse<SharedResponseSocialNetwork>, AxiosError, SharedResponseSocialNetwork, unknown[]> = {},
+  options: UseQueryOptions<AxiosResponse<SharedResponseSocialNetwork<T>>, AxiosError, SharedResponseSocialNetwork<T>, unknown[]> = {},
 ) {
   return useQuery({
     queryKey: getCreatorSocialNetworkQueryKey(params),
     queryFn: async () => {
-      return axios.get<SharedResponseSocialNetwork>(`/${params.socialNetwork}/${params.username}`);
+      return axios.get<SharedResponseSocialNetwork<T>>(`/${params.socialNetwork}/${params.username}`);
     },
     ...options,
   });
 }
 
 export function InsightsInstagram() {
-  const instagramQuery = useGetCreatorSocialNetworkProfile({
+  const instagramQuery = useGetCreatorSocialNetworkProfile<'instagram'>({
     socialNetwork: 'instagram',
     username: 'lorem',
   });
   return <div>{JSON.stringify(instagramQuery.data?.data.instagram_stats)}</div>;
 }
 export function InsightsTiktok() {
-  const tiktokQuery = useGetCreatorSocialNetworkProfile({
+  const tiktokQuery = useGetCreatorSocialNetworkProfile<'tiktok'>({
     socialNetwork: 'tiktok',
     username: 'lorem',
   });
   return <div>{JSON.stringify(tiktokQuery.data?.data.tiktok_stats)}</div>;
 }
 export function InsightsFacebook() {
-  const facebookQuery = useGetCreatorSocialNetworkProfile({
+  const facebookQuery = useGetCreatorSocialNetworkProfile<'facebook'>({
     socialNetwork: 'facebook',
     username: 'lorem',
   });
